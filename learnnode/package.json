@@ -9,7 +9,7 @@
   "devDependencies": {},
   "scripts": {
     "link-start": "learnyounode",
-    "verify-learnyounode": "learnyounode verify my-first-async-io.js",
+    "verify-learnyounode": "learnyounode verify filtered-ls.js",
     "print-learnyounode": "learnyounode print",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
