@@ -1,17 +1,18 @@
 {
-  "name": "learnnode",
+  "name": "express",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "bl": "^4.0.0",
-    "learnyounode": "^4.2.1"
+    "body-parser": "^1.19.0",
+    "expressworks": "^3.4.3",
+    "pug": "^2.0.4",
+    "stylus": "^0.54.7"
   },
   "devDependencies": {},
   "scripts": {
-    "link-start": "learnyounode",
-    "go": "learnyounode verify http-json-api-server.js",
-    "print-learnyounode": "learnyounode print",
+    "link-start": "expressworks",
+    "go": "expressworks verify problem8.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
