@@ -65,6 +65,7 @@ passport.use(
 
                         if(err){
                             //already have the user
+                            console.log("user already exists!")
                             const currentUser = _user;
                             console.log('User is ', JSON.stringify(currentUser));
                             done(null, currentUser);
