@@ -23,4 +23,6 @@ router.get('/google/callback',passport.authenticate('google'),(req, res)=>{
     //res.send('you reached the callback URI');
 });
 
+    
+
 module.exports = router;
