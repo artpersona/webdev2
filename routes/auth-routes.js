@@ -1,8 +1,18 @@
 const router = require('express').Router();
 const passport = require('passport');
-
+const authCheck = (req, res, next)=>{
+    console.log("*********** Performing AuthCheck **************");
+    console.log(req.user);
+    if(!req.user){
+        // If user is not logged in then
+        res.redirect('/auth/login');
+    }
+    else{
+        res.redirect('/profile');
+    }
+}
 // auth login
-router.get('/login',(req, res)=>{
+router.get('/login',authCheck,(req, res)=>{
     res.render('login');
 });
 
