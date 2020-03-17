@@ -4,6 +4,9 @@ const passportSetup = require('./config/passport-setup')
 
 const app = express();
 
+//public
+app.use(express.static(__dirname + '/public'));
+
 // set up view engine
 app.set('view engine', 'ejs');
 
