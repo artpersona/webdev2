@@ -23,7 +23,6 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/js/mdb.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="/script.js"></script>
 </head>
 <body>
   <nav class="mb-1 navbar navbar-expand-lg navbar-dark danger-color">
@@ -33,7 +32,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/">Home
             <span class="sr-only">(current)</span>
           </a>
@@ -43,7 +42,7 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item dropdown ">
+        <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">HR
           </a>
@@ -58,15 +57,15 @@
       <ul class="navbar-nav ml-auto nav-flex-icons">
         <% if(user) { %>
         <li class="nav-item dropdown">
-          <a href="/auth/logout" class="nav-link" id="navbarDropdownMenuLink-333" 
-          >
+          <a href="/auth/logout" class="nav-link" >
             <i class="fas fa-user"></i>
             Logout
           </a>
         </li>
         <% } else { %>
         <li class="nav-item dropdown">
-          <a href="/auth/login"class="nav-link">
+          <a href="/auth/login"class="nav-link" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user"></i>
             Login
           </a>
@@ -75,6 +74,54 @@
       </ul>
     </div>
   </nav>
+
+
+
+
+
+
+<!--Navbar-->
+
+  <!--/.Navbar-->
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center mt-4">
+      <div class="col-md-4 card btn-outline-danger">
+        <div class="card-body text-center">
+          <h3>Employees With Department</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center mt-3">
+      <div class="col-md-11 card">
+        <div class="card-body">
+          <table class="table-hover" id="table">
+            <thead>
+              <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Department ID</th>
+                <th scope="col">Department Name</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i < test.length; i++) { %>
+              <tr>
+                <td><%=test[i].row_to_json.first_name%></td>
+                <td><%=test[i].row_to_json.last_name%></td>
+                <td><%=test[i].row_to_json.department_id%></td>
+                <td><%=test[i].row_to_json.department_name%></td>
+              </tr>
+         
+                <% } %>
+              </tbody>
+              </table>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+ 
 
 
 <!--Loader-->
@@ -186,3 +233,6 @@
 </script>
 </body>
 </html>
+
+
+
