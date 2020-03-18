@@ -323,3 +323,42 @@ svg {
   -o-transition: all .3s ease;
   transition: all .3s ease;
 }
+
+#github-connect {
+  background: rgb(255, 255, 255) url('https://raw.githubusercontent.com/gilbarbara/logos/master/logos/github-icon.svg?sanitize=true') no-repeat scroll 13px 0px / 28px 45px padding-box border-box;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+#github-connect:hover {
+  border-color: rgb(0, 0, 0);
+  background: rgb(26, 28, 29) url('https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/white/svg/github.svg?sanitize=true') no-repeat scroll 13px 0px / 28px 45px padding-box border-box;
+  -webkit-transition: all .8s ease-out;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease-out;
+}
+
+#github-connect span {
+  box-sizing: border-box;
+  color: rgb(31, 35, 37);
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  border: 0px none rgb(0, 0, 0);
+  outline: rgb(255, 255, 255) none 0px;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+#github-connect:hover span {
+  color: #FFF;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
