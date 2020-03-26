@@ -3,6 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook');
 const GitHubStrategy = require('passport-github').Strategy;
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+const SpotifyStrategy = require('passport-spotify').Strategy;
 const keys = require('./keys');
 const User = require('../models/user-model');
 
@@ -26,7 +27,7 @@ passport.deserializeUser((id, done)=>{
 passport.use(
     new GoogleStrategy({
         // options for the google strat
-        callbackURL: '/auth/google/callback',
+        callbackURL: 'https://perez-oauth.herokuapp.com/auth/google/callback',
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
     }, (accessToken, refreshToken, profile, done)=>{
@@ -89,7 +90,7 @@ passport.use(
 passport.use(new FacebookStrategy({
     clientID: keys.facebook.clientID,
     clientSecret: keys.facebook.clientSecret,
-    callbackURL: "/auth/facebook/callback",
+    callbackURL: "https://perez-oauth.herokuapp.com/auth/facebook/callback",
     profileFields: ['id', 'displayName', 'photos', 'email']
   },
   function(accessToken, refreshToken, profile, cb) { 
@@ -124,7 +125,7 @@ passport.use(new FacebookStrategy({
 passport.use(new GitHubStrategy({
     clientID: keys.github.clientID,
     clientSecret: keys.github.clientSecret,
-    callbackURL: "/auth/github/callback"
+    callbackURL: "https://perez-oauth.herokuapp.com/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
       console.log(profile)
@@ -158,7 +159,7 @@ passport.use(new GitHubStrategy({
 passport.use(new LinkedInStrategy({
     clientID: keys.linkedin.clientID,
     clientSecret: keys.linkedin.clientSecret,
-    callbackURL: "/auth/linkedin/callback",
+    callbackURL: "https://perez-oauth.herokuapp.com/auth/linkedin/callback",
     scope: ['r_emailaddress', 'r_liteprofile'],
   }, function(accessToken, refreshToken, profile, done) {
       console.log(profile)
@@ -204,3 +205,56 @@ passport.use(new LinkedInStrategy({
         });
     });
   }));
+
+  passport.use(
+    new SpotifyStrategy(
+      {
+        clientID: keys.spotify.clientID,
+        clientSecret: keys.spotify.clientSecret,
+        callbackURL: "http://localhost:5000/auth/spotify/callback"
+        // https://perez-oauth.herokuapp.com/auth/spotify/callback
+      },
+      function(accessToken, refreshToken, expires_in, profile, done) {
+          console.log(profile)
+        var x;
+        var str = "";
+        var temp = profile.id;
+        for(var i=0;i<temp.length;i++){
+            var x = temp.charCodeAt(i);
+            str += x;
+        }
+        if(profile.photos[0]==undefined){
+            x ="https://i.imgur.com/sy5Jpzd.jpg";
+          }else{
+            x = profile.photos[0].value;
+          }
+        var xd = parseInt(str);
+
+                User.query(`CALL "oauth".insert_when_unique(${xd},
+                    '${profile.displayName}',
+                    '${x}');`,
+                (err,res)=>{
+                console.log(">>>>>>>>>>>>>>>>>>>>>>");
+                const _user = {
+                id: xd,
+                name: profile.displayName,                                
+                picture: x
+                };
+
+                if(err){
+                //already have the user
+                const currentUser = _user;
+                console.log('User is ', JSON.stringify(currentUser));
+                done(null, currentUser);
+                //console.log(err);
+                }else{
+                //if not, new user was created in our db
+                const newUser = _user;
+                console.log('New User created: ' + JSON.stringify(newUser));
+                done(null, newUser);
+                // console.log(res.rows[0]);
+                }
+                });
+      }
+    )
+  );
